@@ -253,7 +253,7 @@
   </div>
 
   <!-- FOOTER TABEL -->
-  <div class="card-footer" style="display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);">
+  <div class="card-footer" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">
     <div>
       Total Dosen Terdaftar: <strong><?= count($dosenList) ?></strong> dari total sistem
     </div>

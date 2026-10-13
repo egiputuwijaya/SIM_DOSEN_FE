@@ -21,7 +21,7 @@ $val = function ($key) use ($dosen) {
   </div>
 
   <div class="card">
-    <div class="card-header">
+    <div class="card-header" style="flex-wrap: wrap; gap: 0.75rem; justify-content: space-between;">
       <h2 class="card-title" style="display: flex; align-items: center; gap: 0.5rem;">
         <span style="color: var(--primary); display: inline-flex; align-items: center;">
           <?= svg_icon('edit', '', 18) ?>
@@ -215,7 +215,7 @@ $val = function ($key) use ($dosen) {
         </div>
       </div>
 
-      <div class="card-footer" style="display: flex; align-items: center; justify-content: flex-end; gap: 0.75rem;">
+      <div class="card-footer" style="display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 0.75rem;">
         <a href="<?= url('/dosen') ?>" class="btn btn-secondary">Batal</a>
         <button type="submit" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.4rem;">
           <?= svg_icon('check-circle', '', 16) ?>

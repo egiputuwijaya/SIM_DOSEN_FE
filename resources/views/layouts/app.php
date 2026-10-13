@@ -10,7 +10,7 @@
     window.BASE_URL = "<?= rtrim(base_url(), '/') ?>";
   </script>
   <style>
-    /* Jaminan Styling Layout Dashboard & Sidebar (Bypass Cache) */
+    /* Jaminan Styling Layout Dashboard & Sidebar (Bypass Cache & Responsive) */
     body {
       margin: 0;
       padding: 0;
@@ -23,7 +23,10 @@
       flex-direction: row !important;
       min-height: 100vh !important;
       width: 100% !important;
+      background-color: var(--bg);
     }
+    
+    /* SIDEBAR (DESKTOP DEFAULT) */
     .app-sidebar {
       width: 270px !important;
       min-width: 270px !important;
@@ -38,18 +41,36 @@
       overflow-y: auto !important;
       z-index: 45 !important;
       box-sizing: border-box !important;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease !important;
+    }
+    .sidebar-brand-wrapper {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      border-bottom: 1px solid var(--border) !important;
+      padding-right: 0.75rem !important;
     }
     .sidebar-brand {
-      padding: 1.25rem 1.5rem !important;
+      padding: 1.15rem 1.25rem !important;
       display: flex !important;
       align-items: center !important;
       gap: 0.85rem !important;
-      border-bottom: 1px solid var(--border) !important;
       text-decoration: none !important;
       color: inherit !important;
+      flex: 1 !important;
+      min-width: 0 !important;
+    }
+    .sidebar-close-btn {
+      display: none !important;
+    }
+    .sidebar-backdrop {
+      display: none !important;
+    }
+    .sidebar-toggle-btn {
+      display: none !important;
     }
     .sidebar-user {
-      padding: 1.15rem 1.5rem !important;
+      padding: 1.15rem 1.25rem !important;
       display: flex !important;
       align-items: center !important;
       gap: 0.85rem !important;
@@ -102,36 +123,6 @@
       font-weight: 700 !important;
       border-left: 3px solid var(--primary) !important;
     }
-    .content-wrapper {
-      flex: 1 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      min-width: 0 !important;
-      width: calc(100% - 270px) !important;
-      background: var(--bg) !important;
-    }
-    .main-content {
-      flex: 1 !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      padding: 1.75rem 2.25rem !important;
-      box-sizing: border-box !important;
-    }
-    .topbar {
-      background: #ffffff !important;
-      border-bottom: 1px solid var(--border) !important;
-      padding: 0.95rem 2.25rem !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: space-between !important;
-      position: sticky !important;
-      top: 0 !important;
-      z-index: 35 !important;
-      backdrop-filter: blur(8px) !important;
-    }
     .sidebar-api-status {
       display: flex !important;
       align-items: center !important;
@@ -170,17 +161,94 @@
     .nav-link-danger:hover .nav-icon {
       color: var(--rose-600) !important;
     }
-    .brand-logo {
-      width: 42px !important;
-      height: 42px !important;
-      border-radius: 12px !important;
-      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
-      color: #ffffff !important;
+
+    /* CONTENT WRAPPER & TOPBAR */
+    .content-wrapper {
+      flex: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      min-width: 0 !important;
+      width: calc(100% - 270px) !important;
+      background: var(--bg) !important;
+    }
+    .topbar {
+      background: #ffffff !important;
+      border-bottom: 1px solid var(--border) !important;
+      padding: 0.95rem 2.25rem !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 35 !important;
+      backdrop-filter: blur(8px) !important;
+      gap: 1rem !important;
+    }
+    .topbar-left {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.85rem !important;
+      min-width: 0 !important;
+    }
+    .topbar-breadcrumb {
+      font-size: 0.875rem !important;
+      color: var(--text-muted) !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.45rem !important;
+      min-width: 0 !important;
+    }
+    .topbar-page-title {
+      color: var(--slate-800) !important;
+      font-weight: 700 !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+    }
+    .topbar-right {
+      display: flex !important;
+      align-items: center !important;
+      gap: 1rem !important;
+      flex-shrink: 0 !important;
+    }
+    .badge-text-short {
+      display: none !important;
+    }
+    .badge-text-full {
+      display: inline !important;
+    }
+    .topbar-user-pill {
+      font-size: 0.85rem !important;
+      font-weight: 600 !important;
+      color: var(--slate-800) !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.5rem !important;
+    }
+    .topbar-avatar {
+      width: 30px !important;
+      height: 30px !important;
+      border-radius: 50% !important;
+      background: var(--primary-subtle) !important;
+      color: var(--primary) !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3) !important;
+      font-size: 0.775rem !important;
+      font-weight: 700 !important;
+      flex-shrink: 0 !important;
     }
+    .main-content {
+      flex: 1 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 1.75rem 2.25rem !important;
+      box-sizing: border-box !important;
+    }
+
     /* FULL-WIDTH ENTERPRISE DASHBOARD STYLES */
     .dashboard-hero {
       background: linear-gradient(135deg, #4338ca 0%, #312e81 60%, #1e1b4b 100%) !important;
@@ -292,6 +360,281 @@
     .progress-bar-fill.emerald {
       background: linear-gradient(90deg, #10b981, #059669) !important;
     }
+
+    /* TABLE RESPONSIVE SCROLL */
+    .table-responsive {
+      width: 100% !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      border-radius: var(--radius-md) !important;
+    }
+    .data-table {
+      min-width: 760px;
+    }
+
+    /* =========================================================================
+       MEDIA QUERIES: RESPONSIVE UNTUK TABLET & SMARTPHONE HANDPHONE
+       ========================================================================= */
+
+    /* 1. TABLET & LAYAR MEDIUM (<= 992px) */
+    @media (max-width: 992px) {
+      .dashboard-wrapper {
+        display: block !important;
+        position: relative !important;
+        overflow-x: hidden !important;
+      }
+      .app-sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        height: 100vh !important;
+        width: 285px !important;
+        min-width: 285px !important;
+        max-width: 85vw !important;
+        z-index: 1050 !important;
+        transform: translateX(-100%) !important;
+        box-shadow: none !important;
+      }
+      .app-sidebar.is-open {
+        transform: translateX(0) !important;
+        box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.35) !important;
+      }
+      .sidebar-close-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: var(--radius-md) !important;
+        border: 1px solid var(--border) !important;
+        background: var(--slate-100) !important;
+        color: var(--slate-600) !important;
+        cursor: pointer !important;
+        flex-shrink: 0 !important;
+        transition: all 0.2s ease !important;
+      }
+      .sidebar-close-btn:hover {
+        background: var(--rose-50) !important;
+        color: var(--rose-600) !important;
+        border-color: var(--rose-200) !important;
+      }
+      .sidebar-backdrop {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: rgba(15, 23, 42, 0.6) !important;
+        backdrop-filter: blur(4px) !important;
+        z-index: 1040 !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transition: opacity 0.25s ease !important;
+        display: block !important;
+      }
+      .sidebar-backdrop.is-open {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+      .content-wrapper {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+      }
+      .topbar {
+        padding: 0.85rem 1.25rem !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1000 !important;
+      }
+      .sidebar-toggle-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        border-radius: var(--radius-md) !important;
+        background: var(--slate-100) !important;
+        border: 1px solid var(--border) !important;
+        color: var(--slate-700) !important;
+        cursor: pointer !important;
+        flex-shrink: 0 !important;
+        transition: all 0.15s ease !important;
+      }
+      .sidebar-toggle-btn:hover {
+        background: var(--slate-200) !important;
+        color: var(--primary) !important;
+      }
+      .main-content {
+        padding: 1.5rem 1.25rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+      }
+      .app-footer {
+        padding: 1.25rem 1.25rem !important;
+      }
+      .footer-container {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        text-align: center !important;
+      }
+    }
+
+    /* 2. TABLET PORTRAIT & SMARTPHONE (<= 768px) */
+    @media (max-width: 768px) {
+      .dashboard-hero {
+        padding: 1.5rem 1.25rem !important;
+        gap: 1.25rem !important;
+        border-radius: var(--radius-md) !important;
+      }
+      .hero-title {
+        font-size: 1.45rem !important;
+        line-height: 1.25 !important;
+      }
+      .hero-subtitle {
+        font-size: 0.875rem !important;
+        line-height: 1.5 !important;
+      }
+      .hero-actions {
+        width: 100% !important;
+        flex-direction: column !important;
+        gap: 0.65rem !important;
+      }
+      .hero-actions .btn {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+      .page-header-bar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.85rem !important;
+        margin-bottom: 1.25rem !important;
+      }
+      .page-header-bar > div:last-child {
+        width: 100% !important;
+      }
+      .page-header-bar .btn {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+      .page-title {
+        font-size: 1.4rem !important;
+      }
+      .filter-toolbar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 1rem !important;
+        gap: 0.85rem !important;
+      }
+      .filter-controls {
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.6rem !important;
+      }
+      .search-input-box {
+        width: 100% !important;
+        min-width: 100% !important;
+      }
+      .select-filter {
+        width: 100% !important;
+      }
+      .filter-controls .btn {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+    }
+
+    /* 3. PONSEL SMARTPHONE (<= 640px) */
+    @media (max-width: 640px) {
+      .topbar {
+        padding: 0.65rem 0.85rem !important;
+        gap: 0.5rem !important;
+      }
+      .topbar-brand-label {
+        display: none !important;
+      }
+      .topbar-dot {
+        display: none !important;
+      }
+      .topbar-page-title {
+        font-size: 0.85rem !important;
+        max-width: 130px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+      .badge-text-full {
+        display: none !important;
+      }
+      .badge-text-short {
+        display: inline !important;
+      }
+      .topbar-user-name {
+        display: none !important;
+      }
+      .topbar-avatar {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.8rem !important;
+      }
+      .main-content {
+        padding: 1rem 0.75rem !important;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.65rem !important;
+        margin-bottom: 1.25rem !important;
+      }
+      .stat-card {
+        padding: 0.9rem 0.8rem !important;
+      }
+      .stat-value {
+        font-size: 1.35rem !important;
+      }
+      .stat-label {
+        font-size: 0.72rem !important;
+      }
+      .form-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.85rem !important;
+      }
+      .card-footer {
+        flex-direction: column-reverse !important;
+        gap: 0.5rem !important;
+        padding: 0.85rem 1rem !important;
+      }
+      .card-footer .btn {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+      .modal-dialog {
+        margin: 0.75rem !important;
+        max-width: calc(100% - 1.5rem) !important;
+        width: calc(100% - 1.5rem) !important;
+      }
+      .modal-detail-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+      }
+    }
+
+    /* 4. PONSEL SMARTPHONE KECIL (<= 380px) */
+    @media (max-width: 380px) {
+      .stats-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .topbar-page-title {
+        max-width: 100px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -302,23 +645,31 @@
   <?php $isKelolaActive = !$isDashboardActive && str_contains($currentUri, '/dosen'); ?>
 
   <div class="dashboard-wrapper">
+    <!-- BACKDROP MOBILE DRAWER -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar(false)"></div>
+
     <!-- SIDEBAR NAVIGASI (ADMIN & DOSEN) -->
     <aside class="app-sidebar" id="appSidebar">
-      <!-- Brand Sidebar -->
-      <a href="<?= (($user['role'] ?? '') === 'DOSEN') ? url('/profil') : url('/dashboard') ?>" class="sidebar-brand">
-        <div style="display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; background: #ffffff; border: 1px solid var(--border); box-shadow: 0 2px 6px rgba(0,0,0,0.05); padding: 3px; flex-shrink: 0;">
-          <img
-            src="<?= asset('logoumb.png') ?>"
-            alt="Logo UMB"
-            style="width: 100%; height: 100%; object-fit: contain;"
-            onerror="this.onerror=null; this.src='<?= base_url('../assets/logoumb.png') ?>';"
-          >
-        </div>
-        <div class="brand-info" style="display: flex; flex-direction: column; min-width: 0;">
-          <span class="brand-title" style="font-size: 0.95rem; font-weight: 800; color: var(--slate-900); line-height: 1.2;">SIM DOSEN</span>
-          <span class="brand-subtitle" style="font-size: 0.675rem; color: var(--text-muted); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Univ. Muhammadiyah Bengkulu</span>
-        </div>
-      </a>
+      <!-- Brand Sidebar Header -->
+      <div class="sidebar-brand-wrapper">
+        <a href="<?= (($user['role'] ?? '') === 'DOSEN') ? url('/profil') : url('/dashboard') ?>" class="sidebar-brand">
+          <div style="display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; background: #ffffff; border: 1px solid var(--border); box-shadow: 0 2px 6px rgba(0,0,0,0.05); padding: 3px; flex-shrink: 0;">
+            <img
+              src="<?= asset('logoumb.png') ?>"
+              alt="Logo UMB"
+              style="width: 100%; height: 100%; object-fit: contain;"
+              onerror="this.onerror=null; this.src='<?= base_url('../assets/logoumb.png') ?>';"
+            >
+          </div>
+          <div class="brand-info" style="display: flex; flex-direction: column; min-width: 0;">
+            <span class="brand-title" style="font-size: 0.95rem; font-weight: 800; color: var(--slate-900); line-height: 1.2;">SIM DOSEN</span>
+            <span class="brand-subtitle" style="font-size: 0.675rem; color: var(--text-muted); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Univ. Muhammadiyah Bengkulu</span>
+          </div>
+        </a>
+        <button type="button" class="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="Tutup Menu">
+          <?= svg_icon('x', '', 18) ?>
+        </button>
+      </div>
 
       <!-- Info Pengguna di Sidebar -->
       <div class="sidebar-user">
@@ -343,20 +694,20 @@
         <ul class="nav-list">
           <?php if (($user['role'] ?? '') === 'DOSEN'): ?>
             <li>
-              <a href="<?= url('/profil') ?>" class="nav-link <?= str_contains($currentUri, '/profil') ? 'active' : '' ?>">
+              <a href="<?= url('/profil') ?>" class="nav-link <?= str_contains($currentUri, '/profil') ? 'active' : '' ?>" onclick="if(window.innerWidth <= 992) toggleSidebar(false)">
                 <span class="nav-icon"><?= svg_icon('id-card', 'nav-svg', 18) ?></span>
                 <span>Profil Saya</span>
               </a>
             </li>
           <?php else: ?>
             <li>
-              <a href="<?= url('/dashboard') ?>" class="nav-link <?= $isDashboardActive ? 'active' : '' ?>">
+              <a href="<?= url('/dashboard') ?>" class="nav-link <?= $isDashboardActive ? 'active' : '' ?>" onclick="if(window.innerWidth <= 992) toggleSidebar(false)">
                 <span class="nav-icon"><?= svg_icon('dashboard', 'nav-svg', 18) ?></span>
                 <span>Dashboard & Statistik</span>
               </a>
             </li>
             <li>
-              <a href="<?= url('/dosen') ?>" class="nav-link <?= $isKelolaActive ? 'active' : '' ?>">
+              <a href="<?= url('/dosen') ?>" class="nav-link <?= $isKelolaActive ? 'active' : '' ?>" onclick="if(window.innerWidth <= 992) toggleSidebar(false)">
                 <span class="nav-icon"><?= svg_icon('users', 'nav-svg', 18) ?></span>
                 <span>Kelola Data Dosen</span>
               </a>
@@ -394,27 +745,28 @@
     <div class="content-wrapper">
       <!-- TOPBAR HEADER -->
       <header class="topbar">
-        <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="topbar-left">
           <button type="button" class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Menu">
             <?= svg_icon('menu', '', 18) ?>
           </button>
-          <div style="font-size: 0.875rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem;">
-            <span>SIM DOSEN</span>
-            <span style="color: var(--slate-300);">&bull;</span>
-            <strong style="color: var(--slate-800);"><?= e($title ?? 'Sistem Informasi Dosen') ?></strong>
+          <div class="topbar-breadcrumb">
+            <span class="topbar-brand-label">SIM DOSEN</span>
+            <span class="topbar-dot">&bull;</span>
+            <strong class="topbar-page-title"><?= e($title ?? 'Sistem Informasi Dosen') ?></strong>
           </div>
         </div>
 
-        <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="topbar-right">
           <span class="badge <?= $isAdmin ? 'badge-danger' : 'badge-info' ?>" style="font-size: 0.75rem; padding: 0.35rem 0.85rem; display: inline-flex; align-items: center; gap: 0.35rem;">
             <?= svg_icon('shield', '', 13) ?>
-            <?= $isAdmin ? 'Izin Akses: Penuh (CRUD)' : 'Izin Akses: Read-Only (Profil Mandiri)' ?>
+            <span class="badge-text-full"><?= $isAdmin ? 'Izin Akses: Penuh (CRUD)' : 'Izin Akses: Read-Only (Profil Mandiri)' ?></span>
+            <span class="badge-text-short"><?= $isAdmin ? 'Admin' : 'Dosen' ?></span>
           </span>
-          <div style="font-size: 0.85rem; font-weight: 600; color: var(--slate-800); display: flex; align-items: center; gap: 0.5rem;">
-            <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-subtle); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700;">
+          <div class="topbar-user-pill">
+            <div class="topbar-avatar">
               <?= strtoupper(substr($user['nama'] ?? 'U', 0, 1)) ?>
             </div>
-            <?= e($user['nama'] ?? 'Pengguna') ?>
+            <span class="topbar-user-name"><?= e($user['nama'] ?? 'Pengguna') ?></span>
           </div>
         </div>
       </header>
@@ -506,7 +858,7 @@
         </button>
       </div>
       <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.875rem;">
+        <div class="modal-detail-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.875rem;">
           <div>
             <label style="color: var(--text-muted); font-size: 0.75rem;">NAMA LENGKAP</label>
             <div id="detail_nama" style="font-weight: 700; font-size: 1rem; color: var(--slate-900);">-</div>
@@ -569,10 +921,30 @@
 
   <script src="<?= asset('js/app.js') ?>"></script>
   <script>
-    function toggleSidebar() {
+    function toggleSidebar(force) {
       const sb = document.getElementById('appSidebar');
-      if (sb) sb.classList.toggle('is-open');
+      const bd = document.getElementById('sidebarBackdrop');
+      if (!sb) return;
+      const isCurrentlyOpen = sb.classList.contains('is-open');
+      const shouldOpen = (force !== undefined) ? force : !isCurrentlyOpen;
+      if (shouldOpen) {
+        sb.classList.add('is-open');
+        if (bd) bd.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      } else {
+        sb.classList.remove('is-open');
+        if (bd) bd.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
     }
+    function closeSidebar() {
+      toggleSidebar(false);
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        toggleSidebar(false);
+      }
+    });
   </script>
 </body>
 </html>

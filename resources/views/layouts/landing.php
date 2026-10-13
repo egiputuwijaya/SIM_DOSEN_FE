@@ -42,6 +42,13 @@
             mobileMenu.classList.remove('is-open');
           });
         });
+
+        // Tutup menu mobile ketika klik di luar
+        document.addEventListener('click', function(e) {
+          if (mobileMenu.classList.contains('is-open') && !mobileMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
+            mobileMenu.classList.remove('is-open');
+          }
+        });
       }
 
       // 2. Sticky Navbar Shadow Effect on Scroll

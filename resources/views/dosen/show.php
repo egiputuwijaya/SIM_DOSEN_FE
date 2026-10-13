@@ -10,9 +10,9 @@
   </div>
 
   <div class="card">
-    <div class="card-header">
-      <div style="display: flex; align-items: center; gap: 1rem;">
-        <div style="width: 52px; height: 52px; border-radius: 12px; background: var(--primary-subtle); color: var(--primary); font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; justify-content: center;">
+    <div class="card-header" style="flex-wrap: wrap; gap: 0.75rem; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+        <div style="width: 52px; height: 52px; border-radius: 12px; background: var(--primary-subtle); color: var(--primary); font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
           <?= strtoupper(substr($dosen['nama'] ?? 'D', 0, 1)) ?>
         </div>
         <div>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="card-body">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1.5rem;">
         <div>
           <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">NIP</label>
           <div style="font-size: 0.95rem; font-weight: 600; font-family: var(--font-mono); color: var(--slate-900);">
@@ -117,7 +117,7 @@
       </div>
     </div>
 
-    <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
       <a href="<?= url('/dosen') ?>" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.4rem;">
         <?= svg_icon('arrow-left', '', 14) ?>
         Kembali

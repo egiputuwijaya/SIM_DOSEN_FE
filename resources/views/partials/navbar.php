@@ -42,7 +42,7 @@
         ?>
         <a href="<?= $targetUrl ?>" class="btn btn-primary landing-btn-action">
           <?= svg_icon('user', '', 17) ?>
-          <span>Portal Saya (<?= e(substr($displayName, 0, 14)) ?>)</span>
+          <span class="btn-action-text">Portal Saya</span>
         </a>
         <form action="<?= url('/logout') ?>" method="POST" style="margin: 0; display: inline;">
           <button type="submit" class="btn btn-secondary landing-btn-logout" title="Keluar">
@@ -51,7 +51,7 @@
         </form>
       <?php else: ?>
         <a href="<?= url('/login') ?>" class="btn btn-primary landing-btn-action">
-          <span>Masuk ke Portal</span>
+          <span class="btn-action-text">Masuk Portal</span>
           <?= svg_icon('arrow-right', '', 16) ?>
         </a>
       <?php endif; ?>

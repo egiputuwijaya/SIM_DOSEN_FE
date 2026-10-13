@@ -1,20 +1,20 @@
 <!-- PROFIL DOSEN HERO CARD -->
-<div class="card full-width-card" style="margin-bottom: 2rem; border: 1px solid var(--border); border-top: 4px solid var(--primary); background: #ffffff; padding: 2rem; box-shadow: var(--shadow-sm); border-radius: var(--radius-lg);">
+<div class="card full-width-card profile-hero-card" style="margin-bottom: 2rem; border: 1px solid var(--border); border-top: 4px solid var(--primary); background: #ffffff; padding: 2rem; box-shadow: var(--shadow-sm); border-radius: var(--radius-lg);">
   <!-- IDENTITAS UTAMA (AVATAR, NAMA & BADGES) -->
-  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
-    <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+  <div class="profile-hero-inner" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
+    <div style="display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;">
       <!-- AVATAR DENGAN INISIAL -->
-      <div style="width: 76px; height: 76px; border-radius: 18px; background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%); color: #ffffff; font-size: 2rem; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(79, 70, 229, 0.2); position: relative; flex-shrink: 0;">
+      <div style="width: 72px; height: 72px; border-radius: 18px; background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%); color: #ffffff; font-size: 1.9rem; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px rgba(79, 70, 229, 0.2); position: relative; flex-shrink: 0;">
         <?= strtoupper(substr($dosen['nama'] ?? 'D', 0, 1)) ?>
         <span style="position: absolute; bottom: -2px; right: -2px; width: 14px; height: 14px; background: #10b981; border: 2.5px solid #ffffff; border-radius: 50%;" title="Status Akun Aktif"></span>
       </div>
 
       <!-- NAMA LENGKAP & STATUS -->
       <div>
-        <h1 style="font-size: 1.55rem; font-weight: 800; color: var(--slate-900); letter-spacing: -0.02em; margin: 0 0 0.5rem 0; line-height: 1.25;">
+        <h1 style="font-size: 1.45rem; font-weight: 800; color: var(--slate-900); letter-spacing: -0.02em; margin: 0 0 0.5rem 0; line-height: 1.25;">
           <?= e($dosen['nama'] ?? 'Dosen Universitas') ?>
         </h1>
-        <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
           <span class="badge badge-success" style="font-weight: 700;">
             <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: currentColor;"></span>
             <?= e($dosen['status_aktivitas'] ?? 'Aktif') ?>
@@ -34,8 +34,8 @@
     </div>
 
     <!-- ROLE & ID BADGE -->
-    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem;">
-      <span class="badge" style="background: var(--primary-light); color: var(--primary-dark); font-weight: 700; font-size: 0.8rem; padding: 0.45rem 0.95rem; display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid rgba(79, 70, 229, 0.2);">
+    <div class="profile-role-badge-box" style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem;">
+      <span class="badge" style="background: var(--primary-subtle); color: var(--primary); font-weight: 700; font-size: 0.8rem; padding: 0.45rem 0.95rem; display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid rgba(79, 70, 229, 0.2);">
         <?= svg_icon('shield', '', 14) ?>
         Role: DOSEN (Profil Pribadi)
       </span>
@@ -46,7 +46,7 @@
   </div>
 
   <!-- METADATA PEGAWAI (NIP, NUPTK, NO REGISTRASI) -->
-  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; padding: 0.85rem 1.25rem; background: var(--slate-50); border: 1px solid var(--border); border-radius: var(--radius-md);">
+  <div class="profile-meta-row" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; padding: 0.85rem 1.25rem; background: var(--slate-50); border: 1px solid var(--border); border-radius: var(--radius-md);">
     <div style="display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center;">
       <?php if (!empty($dosen['nip'])): ?>
         <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.825rem;">
@@ -76,7 +76,7 @@
 </div>
 
 <!-- INFORMASI DETAIL PROFIL (GRID 2 KOLOM) -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+<div class="profile-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
   <!-- KARTU 1: JABATAN & KEPANGKATAN -->
   <div class="card">
     <div class="card-header">

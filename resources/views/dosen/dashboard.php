@@ -99,7 +99,7 @@ $isAdmin = can_write();
 </div>
 
 <!-- ANALYTICS CARDS (2 KOLOM LUAS) -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+<div class="analytics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
   <!-- KARTU 1: JABATAN FUNGSIONAL -->
   <div class="card">
     <div class="card-header">
@@ -164,7 +164,7 @@ $isAdmin = can_write();
       <div style="font-size: 0.8rem; font-weight: 700; color: var(--slate-400); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.75rem;">
         Distribusi Status Keaktifan
       </div>
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(75px, 1fr)); gap: 0.75rem;">
         <div style="background: var(--emerald-50); border: 1px solid #a7f3d0; border-radius: var(--radius-md); padding: 0.75rem; text-align: center;">
           <div style="font-size: 1.3rem; font-weight: 800; color: var(--emerald-700);"><?= $aktif ?></div>
           <div style="font-size: 0.725rem; font-weight: 600; color: var(--emerald-700);">Aktif</div>
@@ -184,7 +184,7 @@ $isAdmin = can_write();
 
 <!-- RINGKASAN DOSEN TERBARU -->
 <div class="card">
-  <div class="card-header" style="justify-content: space-between;">
+  <div class="card-header" style="justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
     <h2 class="card-title">
       <span style="color: var(--primary); display: inline-flex; align-items: center;">
         <?= svg_icon('users', '', 20) ?>
