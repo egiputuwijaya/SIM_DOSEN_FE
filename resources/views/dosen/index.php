@@ -14,8 +14,14 @@
     </p>
   </div>
 
-  <div style="display: flex; align-items: center; gap: 0.75rem;">
+  <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
     <?php if (can_write()): ?>
+      <form action="<?= url('/dosen/sync') ?>" method="POST" style="margin: 0;" onsubmit="return confirm('Apakah Anda yakin ingin menyinkronkan data dosen dari SIM Mahasiswa API?');">
+        <button type="submit" class="btn btn-secondary" style="border: 1px solid var(--slate-300); background: #ffffff; color: var(--slate-700); font-weight: 600; box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; gap: 0.45rem;" title="Tarik dan perbarui data dosen dari SIM Mahasiswa">
+          <?= svg_icon('refresh', '', 16) ?>
+          Sinkronisasi SSO
+        </button>
+      </form>
       <a href="<?= url('/dosen/create') ?>" class="btn btn-primary" style="box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);">
         <?= svg_icon('user-plus', '', 18) ?>
         Tambah Dosen Baru

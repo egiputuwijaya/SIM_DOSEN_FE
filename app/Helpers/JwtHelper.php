@@ -42,8 +42,8 @@ class JwtHelper
         array $scope = [],
         int $expiresInSeconds = 3600
     ): string {
-        $secret = App::config('jwt_secret');
-        $issuer = App::config('jwt_issuer', 'sim-mhs-api');
+        $secret = App::config('jwt_secret') ?: (getenv('JWT_SECRET') ?: 'EDzB85JxzloVIG0NO0Y74qpOPu_HDb0Cfr630bIf3-u6E3KoKSy6TqObHRVFm0ZW');
+        $issuer = App::config('jwt_issuer') ?: 'sim-mhs-api';
 
         $header = [
             'alg' => 'HS256',

@@ -65,7 +65,18 @@ class DosenController extends Controller
             }
         }
 
-        // 2. Cari data dosen berdasarkan nama jika belum ditemukan
+        // 2. Cari data dosen berdasarkan nomor_registrasi (REG-UMB- + UPPER(username))
+        if (!$dosenData && !empty($user['username'])) {
+            $expectedReg = 'REG-UMB-' . strtoupper(trim($user['username']));
+            foreach ($allDosen as $d) {
+                if (strtoupper($d['nomor_registrasi'] ?? '') === $expectedReg) {
+                    $dosenData = $d;
+                    break;
+                }
+            }
+        }
+
+        // 3. Cari data dosen berdasarkan nama jika belum ditemukan
         if (!$dosenData && !empty($user['nama'])) {
             $userNamaClean = strtolower(trim($user['nama']));
             foreach ($allDosen as $d) {
@@ -77,22 +88,23 @@ class DosenController extends Controller
             }
         }
 
-        // 3. Jika belum ditemukan, buat data profil berbasis akun SSO yang sedang login
+        // 4. Jika belum ditemukan, buat data profil berbasis akun SSO yang sedang login
         if (!$dosenData) {
+            $usernameUpper = strtoupper(trim($user['username'] ?? 'DOSEN01'));
             $dosenData = [
                 'nama' => $user['nama'] ?? 'Dr. Budi Santoso, M.Kom.',
-                'nip' => $user['nip'] ?? '198501012010011005',
-                'nuptk' => '198501012010011005',
-                'nomor_registrasi' => 'REG-2026-0001',
-                'jabatan_fungsional' => 'Lektor',
-                'kepangkatan' => 'Penata Tk.I / III/d',
+                'nip' => $user['nip'] ?? '-',
+                'nuptk' => '-',
+                'nomor_registrasi' => 'REG-UMB-' . $usernameUpper,
+                'jabatan_fungsional' => 'Lektor Kepala',
+                'kepangkatan' => 'Pembina IV/a',
                 'pendidikan_terakhir' => 'S3 (Doktor)',
-                'rumpun_ilmu' => 'Ilmu Komputer & Informatika',
+                'rumpun_ilmu' => 'Teknik Informatika',
                 'status_serdos' => 'Lulus',
                 'status_pegawai' => 'Dosen Tetap',
                 'ikatan_kerja' => 'Permanen',
                 'status_aktivitas' => 'Aktif',
-                'penempatan' => 'Fakultas Teknik Informatika (FTI)',
+                'penempatan' => 'Fakultas Teknik - Teknik Informatika',
             ];
         } else {
             // Prioritaskan nama akun SSO yang sedang aktif
@@ -346,6 +358,24 @@ class DosenController extends Controller
         }
 
         $errorMessage = $response['message'] ?: 'Gagal menghapus data dosen.';
+        $this->redirectWithError('/dosen', $errorMessage);
+    }
+
+    /**
+     * Sinkronisasi data dosen dari SIM Mahasiswa API (role DOSEN)
+     */
+    public function sync(Request $request): void
+    {
+        $this->requireWriteAccess();
+
+        $response = $this->api->post('/dosen/sync', []);
+
+        if ($response['success']) {
+            $count = count($response['data'] ?? []);
+            $this->redirectWithSuccess('/dosen', "Berhasil menyinkronkan $count data dosen dari SIM Mahasiswa!");
+        }
+
+        $errorMessage = $response['message'] ?: 'Gagal menyinkronkan data dosen dari SIM Mahasiswa.';
         $this->redirectWithError('/dosen', $errorMessage);
     }
 

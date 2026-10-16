@@ -25,6 +25,7 @@ Router::get('/dashboard', [DosenController::class, 'dashboard']);
 
 // Modul Kelola Data Dosen (CRUD)
 Router::get('/dosen', [DosenController::class, 'index']);
+Router::post('/dosen/sync', [DosenController::class, 'sync']);
 Router::get('/dosen/create', [DosenController::class, 'create']);
 Router::post('/dosen', [DosenController::class, 'store']);
 Router::get('/dosen/{id}', [DosenController::class, 'show']);
