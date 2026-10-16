@@ -12,18 +12,7 @@ class HomeController extends Controller
     public function index(Request $request): void
     {
         $stats = [
-            [
-                'number' => '350+',
-                'label' => 'Dosen Tetap & Bersertifikasi',
-                'desc' => 'Tenaga pendidik profesional berintegritas tinggi',
-                'icon' => 'academic-cap'
-            ],
-            [
-                'number' => '9',
-                'label' => 'Fakultas & Pascasarjana',
-                'desc' => 'Menaungi berbagai bidang ilmu sains dan humaniora',
-                'icon' => 'building'
-            ],
+          
             [
                 'number' => '28',
                 'label' => 'Program Studi',

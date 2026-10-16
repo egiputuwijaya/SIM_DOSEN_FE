@@ -7,11 +7,7 @@
 <section class="landing-hero" id="beranda">
   <div class="landing-container hero-grid">
     <div class="hero-text-content">
-      <div class="landing-badge">
-        <?= svg_icon('shield', '', 16) ?>
-        <span>Portal Resmi Dosen Universitas Muhammadiyah Bengkulu</span>
-      </div>
-
+     
       <h1 class="hero-title">
         Sistem Informasi <span class="gradient-text">Manajemen Dosen</span>
       </h1>
